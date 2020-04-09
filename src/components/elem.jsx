@@ -1,0 +1,1 @@
+// renders one specific elem of either right or left side (top or bottom)

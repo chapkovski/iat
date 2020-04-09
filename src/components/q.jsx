@@ -1,0 +1,1 @@
+// render centeral element (image or word) that should be responded

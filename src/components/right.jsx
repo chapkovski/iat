@@ -1,0 +1,1 @@
+// renders right part of the screen

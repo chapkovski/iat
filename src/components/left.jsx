@@ -1,0 +1,1 @@
+// renders left part of the screen
