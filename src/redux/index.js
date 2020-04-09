@@ -7,8 +7,7 @@ import persistState from 'redux-localstorage'
 
 // enhancer for persisting store in local storage
 const enhancer = persistState()
-
-// const store = createStore(rootReducer, enhancer, )
+ 
 const store = configureStore({
   reducer: rootReducer,
   enhancers: [enhancer]

@@ -1,12 +1,7 @@
 import React from 'react';
 import logo from './logo.svg';
 import './App.css';
-const data = [{
-  id: 1,
-  q: { type: 'text', content: 'jopa', belongs: 'left' },
-  left: [{ label: 'bad' }, { label: 'cold' }],
-  right: [{ label: 'good' }, { label: 'hot' }]
-}]
+
 function App() {
   return (
     <div className="App">
