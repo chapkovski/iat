@@ -1,10 +1,13 @@
 // renders footer
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef, useContext } from "react";
 import Left from './left'
 import Right from './right'
 import Q from './q'
 import {Container, Row, Col} from 'react-bootstrap'
-const right = () => {
+import ParamsContext from '../params'
+const Main = () => {
+    const params = useContext(ParamsContext);
+    console.log(params)
     return (
         <Container fluid>
             <Row>
@@ -15,4 +18,4 @@ const right = () => {
         </Container>
     )
 }
-export default right
+export default Main
