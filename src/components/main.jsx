@@ -5,9 +5,11 @@ import Right from './right'
 import Q from './q'
 import {Container, Row, Col} from 'react-bootstrap'
 import ParamsContext from '../params'
+import useKeyDown from './useKeyListener'
 const Main = () => {
     const params = useContext(ParamsContext);
-    console.log(params)
+    const letter = useKeyDown()
+    useEffect(()=>{console.log("KEY PRESSED", letter)},[letter])
     return (
         <Container fluid>
             <Row>

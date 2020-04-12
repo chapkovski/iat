@@ -7,7 +7,7 @@ import {useKeyDown} from './components/useKeyListener';
 function App() {
   // const letter = useKeyDown();
   // console.log('LETTER:', letter)
-  const user = { name: 'Tania', loggedIn: true }
+  const user = { name: 'Tania', loggedIn: true , allowedLetters:['a', 's']}
   return (
     <ParamsProvider value={user}>
     <div className="App">
