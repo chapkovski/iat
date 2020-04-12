@@ -1,15 +1,14 @@
 // renders footer
-import React, { useState, useEffect, useRef } from "react";
-import useTimeout from 'use-timeout'
+import React, { useEffect, } from "react";
+
 import Elem from './elem';
 import '../sass/sides.scss'
 
 
-const Left = () => {
-    const [blinkClass, setBlinkClass] = useState('blink_me')
-    useTimeout(() => setBlinkClass(''), 1000)
+const Left = ({ blink }) => {
+    useEffect(() => { console.debug('BLINK HAS CHANGED') }, [blink])
     return (
-        <div className={blinkClass}>
+        <div className={`element${blink ? " highlight" : ""}`}>
             <Elem />
         </div>
     )

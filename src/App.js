@@ -4,7 +4,7 @@ import './App.scss';
 import Footer from './components/footer';
 import { ParamsProvider } from './context'
 import params from './params'
-import {useKeyDown} from './components/useKeyListener';
+
 function App() {
   // const letter = useKeyDown();
   // console.log('LETTER:', letter)

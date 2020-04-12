@@ -1,9 +1,13 @@
-.blink_me {
-    animation: blinker 1s linear infinite;
+$transition_length: 0.25s;
+.element {
+    -moz-transition: all $transition_length ease-in;
+    -o-transition: all $transition_length ease-in;
+    -webkit-transition: all $transition_length ease-in;
+    transition: all 0$transition_length ease-in;
+    border: 10px solid black;
+     
   }
   
-  @keyframes blinker {
-    50% {
-      opacity: 0;
-    }
+  .highlight {
+    border: 10px solid orange;
   }
