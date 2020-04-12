@@ -1,6 +1,6 @@
 import { useState, useContext } from "react";
 import useEventListener from "@use-it/event-listener";
-import ParamsContext from '../params'
+import ParamsContext from '../context'
 import { getTime } from 'date-fns'
 const useKeyDown = () => {
     const { allowedLetters } = useContext(ParamsContext);

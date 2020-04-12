@@ -2,7 +2,8 @@ import React from 'react';
 import Main from './components/main'
 import './App.scss';
 import Footer from './components/footer';
-import { ParamsProvider, params } from './params'
+import { ParamsProvider } from './context'
+import params from './params'
 import {useKeyDown} from './components/useKeyListener';
 function App() {
   // const letter = useKeyDown();
