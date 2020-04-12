@@ -2,14 +2,14 @@ import React from 'react';
 import Main from './components/main'
 import './App.scss';
 import Footer from './components/footer';
-import { ParamsProvider } from './params'
+import { ParamsProvider, params } from './params'
 import {useKeyDown} from './components/useKeyListener';
 function App() {
   // const letter = useKeyDown();
   // console.log('LETTER:', letter)
-  const user = { name: 'Tania', loggedIn: true , allowedLetters:['a', 's']}
+  
   return (
-    <ParamsProvider value={user}>
+    <ParamsProvider value={params}>
     <div className="App">
       <Main/>
       <Footer/>
