@@ -5,10 +5,12 @@ import Elem from './elem';
 import '../sass/sides.scss'
 
 
-const Left = ({ blink }) => {
-    useEffect(() => { console.debug('BLINK HAS CHANGED') }, [blink])
+const Left = ({ blink, data }) => {
+    console.debug('DATA', data)
+
     return (
         <div className={`element${blink ? " highlight" : ""}`}>
+        
             <Elem />
         </div>
     )

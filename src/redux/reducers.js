@@ -1,26 +1,25 @@
 import { combineReducers } from 'redux';
 import { createReducer } from '@reduxjs/toolkit'
-import { setAnswer, increaseCurrentQ } from "./actions";
+import { addAnswer, addQuestion, increaseCurrentQ } from "./actions";
 
-const data = [{
-  id: 1,
-  q: { type: 'text', content: 'jopa', belongs: 'left' },
-  left: [{ label: 'bad' }, { label: 'cold' }],
-  right: [{ label: 'good' }, { label: 'hot' }]
-}]
 
 const answers = createReducer([], {
-  [setAnswer]: (state, action) => {
+  [addAnswer]: (state, action) => {
 
     state.push(action.payload)
   }
 })
-const questions = createReducer(data, {})
-const currentQuestion = createReducer(0, {
-  [increaseCurrentQ]: (state, action) => { state +=1 }
+const pointer = createReducer(0, {
+  [increaseCurrentQ]: (state, action) => { state += 1 }
+})
+const currentQuestion = createReducer({}, {
+  [addQuestion]: (state, action) => {
+    console.debug("PAYLOAD", action.payload)
+    return action.payload;
+  }
 })
 export default combineReducers({
   answers,
-  questions,
+  pointer,
   currentQuestion
 })

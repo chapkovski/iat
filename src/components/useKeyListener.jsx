@@ -4,8 +4,8 @@ import ParamsContext from '../context'
 import { getTime } from 'date-fns'
 import _ from 'lodash';
 const useKeyDown = () => {
-    const { left, right } = useContext(ParamsContext);
-    const correspondance = { [left]: 'left', [right]: 'right' }
+    const { leftKey, rightKey } = useContext(ParamsContext);
+    const correspondance = { [leftKey]: 'left', [rightKey]: 'right' }
     const [letter, setLetter] = useState('');
     useEventListener("keydown", ({ key }) => {
         if (_.keys(correspondance).includes(key)) {
