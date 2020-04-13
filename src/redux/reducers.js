@@ -2,7 +2,6 @@ import { combineReducers } from 'redux';
 import { createReducer } from '@reduxjs/toolkit'
 import { addAnswer, setCurrentQuestion, increaseCurrentQ } from "./actions";
 
-
 const answers = createReducer([], {
   [addAnswer]: (state, action) => {
 

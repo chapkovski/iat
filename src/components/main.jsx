@@ -8,7 +8,7 @@ import { Container, Row, Col } from 'react-bootstrap'
 import ParamsContext from '../context'
 import useKeyDown from './useKeyListener'
 import { getTime } from 'date-fns'
-import { setCurrentQuestion } from '../redux/actions'
+
 import ErrorSign from './errorSign'
 
 import '../sass/main.scss'
@@ -17,10 +17,11 @@ const Main = () => {
     const dispatch = useDispatch();
     const [error, setError] = useState(false)
     const pointer = useSelector((state) => state.pointer);
-    const currentQuestion = useSelector((state) => state.currentQuestion);
+    const [currentQuestion, setCurrentQuestion] = useState(data[pointer]);
+
     useEffect(() => {
         const currentData = data[pointer]
-        dispatch(setCurrentQuestion({ ...currentData, timeShown: getTime(new Date()) }))
+        setCurrentQuestion({ ...currentData, timeShown: getTime(new Date()) })
     }, [])
     const [leftBlink, setLeftBlink] = useState(false);
     const [rightBlink, setRightBlink] = useState(false);
@@ -34,9 +35,14 @@ const Main = () => {
 
     useEffect(() => {
         const answer = letter.answer
+        const currentBelongs = currentQuestion.body.belongs;
+        console.debug('CURRENT BELONING', currentBelongs)
+        if (answer !== currentBelongs) { tempToggle(setError, true, false) }
         switch (answer) {
             case 'left':
+                console.debug(currentQuestion);
                 tempToggle(setLeftBlink, true, false);
+
                 break;
             case 'right':
                 tempToggle(setRightBlink, true, false);
