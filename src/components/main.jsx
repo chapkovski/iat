@@ -1,5 +1,5 @@
 // renders footer
-import React, { useState, useEffect, useContext, useReducer } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import Side from './side'
 import _ from 'lodash';
 import { useSelector, useDispatch } from "react-redux";
@@ -8,7 +8,7 @@ import { Container, Row, Col } from 'react-bootstrap'
 import ParamsContext from '../context'
 import useKeyDown from './useKeyListener'
 import { getTime } from 'date-fns'
-
+import { increaseCurrentQ, addAnswer } from '../redux/actions'
 import ErrorSign from './errorSign'
 
 import '../sass/main.scss'
@@ -18,7 +18,10 @@ const Main = () => {
     const [error, setError] = useState(false)
     const pointer = useSelector((state) => state.pointer);
     const [currentQuestion, setCurrentQuestion] = useState(data[pointer]);
-
+    useEffect(() => {
+        const currentData = data[pointer]
+        setCurrentQuestion({ ...currentData, timeShown: getTime(new Date()) })
+    }, [pointer, data])
     useEffect(() => {
         const currentData = data[pointer]
         setCurrentQuestion({ ...currentData, timeShown: getTime(new Date()) })
@@ -26,9 +29,9 @@ const Main = () => {
     const [leftBlink, setLeftBlink] = useState(false);
     const [rightBlink, setRightBlink] = useState(false);
     const letter = useKeyDown();
-    const tempToggle = (toggler, firstState, lastState) => {
+    const tempToggle = async (toggler, firstState, lastState) => {
         toggler(firstState);
-        setTimeout(() => {
+        await setTimeout(() => {
             toggler(lastState);
         }, 500);
     };
@@ -36,20 +39,29 @@ const Main = () => {
     useEffect(() => {
         const answer = letter.answer
         const currentBelongs = currentQuestion.body.belongs;
-        console.debug('CURRENT BELONING', currentBelongs)
-        if (answer !== currentBelongs) { tempToggle(setError, true, false) }
+        const allowedAnswers = ['left', 'right']
         switch (answer) {
             case 'left':
-                console.debug(currentQuestion);
-                tempToggle(setLeftBlink, true, false);
 
+                tempToggle(setLeftBlink, true, false);
                 break;
             case 'right':
                 tempToggle(setRightBlink, true, false);
                 break;
             default:
-                return;
+                ;
         }
+        if (allowedAnswers.includes(answer)) {
+            if (answer === currentBelongs) {
+                setError(false);
+                dispatch(addAnswer({ ...currentQuestion, timeAnswered: getTime(new Date()) }))
+                dispatch(increaseCurrentQ())
+
+            } else {
+                tempToggle(setError, true, false)
+            }
+        }
+
 
     }, [letter])
     return (
@@ -57,7 +69,7 @@ const Main = () => {
             <Row>
                 <Col><Side blink={leftBlink} data={currentQuestion.left} sideName='left' />   </Col>
                 <Col className='central'>
-                    {error && <ErrorSign />}
+                    {error && <ErrorSign show={error} />}
                     <Q data={currentQuestion.body} />
                 </Col>
                 <Col><Side blink={rightBlink} data={currentQuestion.right} sideName='right' /></Col>

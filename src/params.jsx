@@ -7,6 +7,12 @@ const data = [
         left: [{ text: 'Fat' }],
         right: [{ text: 'Slim' }],
         body: { text: 'Fatso', belongs: 'left' }
+    },
+    {
+        id: 2,
+        left: [{ text: 'Fat' }],
+        right: [{ text: 'Slim' }],
+        body: { text: 'Fatty', belongs: 'left' }
     }
 ]
 const params = { leftKey, rightKey, data }
