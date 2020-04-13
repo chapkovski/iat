@@ -1,0 +1,9 @@
+.central {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  min-height: 200px;
+  background-color: rgba(33, 33, 33, 0.3);
+}

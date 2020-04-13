@@ -9,9 +9,13 @@ import ParamsContext from '../context'
 import useKeyDown from './useKeyListener'
 import { getTime } from 'date-fns'
 import { setCurrentQuestion } from '../redux/actions'
+import ErrorSign from './errorSign'
+
+import '../sass/main.scss'
 const Main = () => {
     const { data } = useContext(ParamsContext);
     const dispatch = useDispatch();
+    const [error, setError] = useState(false)
     const pointer = useSelector((state) => state.pointer);
     const currentQuestion = useSelector((state) => state.currentQuestion);
     useEffect(() => {
@@ -46,7 +50,10 @@ const Main = () => {
         <Container fluid>
             <Row>
                 <Col><Side blink={leftBlink} data={currentQuestion.left} sideName='left' />   </Col>
-                <Col><Q data={currentQuestion.body} />  </Col>
+                <Col className='central'>
+                    {error && <ErrorSign />}
+                    <Q data={currentQuestion.body} />
+                </Col>
                 <Col><Side blink={rightBlink} data={currentQuestion.right} sideName='right' /></Col>
             </Row>
         </Container>
