@@ -1,9 +1,11 @@
 // renders footer
 import React  from "react";
 import Alert from 'react-bootstrap/Alert'
-const footer = ()=>{
+const Q = ({data})=>{
+    console.log('DATA', data)
+    const text = (data && data.text)? data.text: ''
     return (
-        <Alert variant='primary'>HELLO</Alert>
+        <Alert variant='primary'>{text}</Alert>
     )
 }
-export default footer
+export default Q

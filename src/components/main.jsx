@@ -8,19 +8,15 @@ import { Container, Row, Col } from 'react-bootstrap'
 import ParamsContext from '../context'
 import useKeyDown from './useKeyListener'
 import { getTime } from 'date-fns'
-import { addQuestion } from '../redux/actions'
+import { setCurrentQuestion } from '../redux/actions'
 const Main = () => {
     const { data } = useContext(ParamsContext);
     const dispatch = useDispatch();
-    const [currentQ, setCurrentQ] = useState({});
     const pointer = useSelector((state) => state.pointer);
-    const storedQ = useSelector((state) => state.currentQuestion);
+    const currentQuestion = useSelector((state) => state.currentQuestion);
     useEffect(() => {
-        if (storedQ && storedQ.id) { setCurrentQ(_.find(data, { id: storedQ.id })) } else {
-            setCurrentQ(data[pointer])
-            dispatch(addQuestion({ id: data[pointer].id, time_shown: getTime(new Date()) }))
-        }
-
+        const currentData = data[pointer]
+        dispatch(setCurrentQuestion({ ...currentData, timeShown: getTime(new Date()) }))
     }, [])
     const [leftBlink, setLeftBlink] = useState(false);
     const [rightBlink, setRightBlink] = useState(false);
@@ -49,9 +45,9 @@ const Main = () => {
     return (
         <Container fluid>
             <Row>
-                <Col><Side blink={leftBlink} data={currentQ.left} />   </Col>
-                <Col><Q data={currentQ.body} />  </Col>
-                <Col><Side blink={rightBlink} data={currentQ.right} /></Col>
+                <Col><Side blink={leftBlink} data={currentQuestion.left} sideName='left' />   </Col>
+                <Col><Q data={currentQuestion.body} />  </Col>
+                <Col><Side blink={rightBlink} data={currentQuestion.right} sideName='right' /></Col>
             </Row>
         </Container>
     )
