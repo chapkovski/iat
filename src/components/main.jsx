@@ -4,7 +4,7 @@ import Side from './side'
 import _ from 'lodash';
 import { useSelector, useDispatch } from "react-redux";
 import Q from './q'
-import { Container, Row, Col } from 'react-bootstrap'
+import { Container, Row, Col, Alert } from 'react-bootstrap'
 import ParamsContext from '../context'
 import useKeyDown from './useKeyListener'
 import { getTime } from 'date-fns'
@@ -13,7 +13,7 @@ import ErrorSign from './errorSign'
 
 import '../sass/main.scss'
 const Main = () => {
-    const { data } = useContext(ParamsContext);
+    const { data, leftKey, rightKey } = useContext(ParamsContext);
     const dispatch = useDispatch();
     const [error, setError] = useState(false)
     const pointer = useSelector((state) => state.pointer);
@@ -67,12 +67,18 @@ const Main = () => {
     return (
         <Container fluid>
             <Row>
-                <Col><Side blink={leftBlink} data={currentQuestion.left} sideName='left' />   </Col>
+                <Col>
+                    <Alert>Press '{leftKey}' for</Alert>
+                    <Side blink={leftBlink} data={currentQuestion.left} sideName='left' />
+                </Col>
                 <Col className='central'>
                     {error && <ErrorSign show={error} />}
                     <Q data={currentQuestion.body} />
                 </Col>
-                <Col><Side blink={rightBlink} data={currentQuestion.right} sideName='right' /></Col>
+                <Col>
+                <Alert>Press '{rightKey}' for</Alert>
+                    <Side blink={rightBlink} data={currentQuestion.right} sideName='right' />
+                </Col>
             </Row>
         </Container>
     )
